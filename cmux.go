@@ -225,6 +225,7 @@ type muxListener struct {
 	connc chan net.Conn
 }
 
+// 重写 Listener 接口的 Accept 方法，从 chan 中获取 conn
 func (l muxListener) Accept() (net.Conn, error) {
 	c, ok := <-l.connc
 	if !ok {
